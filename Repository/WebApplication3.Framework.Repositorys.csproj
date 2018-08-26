@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LINQKit.Core" Version="1.1.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IRepository\WebApplication3.Framework.IRepositorys.csproj" />
+    <ProjectReference Include="..\Model\WebApplication3.Framework.Models.csproj" />
+  </ItemGroup>
+
+</Project>

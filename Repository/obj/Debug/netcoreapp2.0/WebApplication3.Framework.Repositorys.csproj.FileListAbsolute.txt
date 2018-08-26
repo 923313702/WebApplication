@@ -1,0 +1,14 @@
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.deps.json
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.csprojAssemblyReference.cache
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.csproj.CopyComplete
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\WebApplication3.Framework.Repositorys.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.Models.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.IRepositorys.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.IRepositorys.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\WebApplication3.Framework.Models.pdb

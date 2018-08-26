@@ -1,0 +1,14 @@
+c:\users\administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\IRepository.dll
+c:\users\administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\Model.dll
+c:\users\administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.csprojAssemblyReference.cache
+c:\users\administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.csproj.CoreCompileInputs.cache
+c:\users\administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.AssemblyInfoInputs.cache
+c:\users\administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\Repository.deps.json
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\Repository.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\Repository.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\IRepository.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\bin\Debug\netcoreapp2.0\Model.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.csproj.CopyComplete
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.dll
+C:\Users\Administrator\source\repos\WebApplication3\Repository\obj\Debug\netcoreapp2.0\Repository.pdb

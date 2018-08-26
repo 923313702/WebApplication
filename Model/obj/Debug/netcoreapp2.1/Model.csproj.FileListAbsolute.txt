@@ -1,0 +1,9 @@
+c:\users\administrator\source\repos\WebApplication3\Model\bin\Debug\netcoreapp2.1\Model.deps.json
+c:\users\administrator\source\repos\WebApplication3\Model\bin\Debug\netcoreapp2.1\Model.dll
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.csprojAssemblyReference.cache
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.csproj.CoreCompileInputs.cache
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.AssemblyInfoInputs.cache
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.AssemblyInfo.cs
+c:\users\administrator\source\repos\WebApplication3\Model\bin\Debug\netcoreapp2.1\Model.pdb
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.dll
+c:\users\administrator\source\repos\WebApplication3\Model\obj\Debug\netcoreapp2.1\Model.pdb

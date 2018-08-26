@@ -1,0 +1,355 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+   
+    <link href="~/css/metroStyle/metroStyle.css" rel="stylesheet" />
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page One</a></li>
+                <li><a href="#">Page Two</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="col-md-3">
+            <ul id="myZtree" class="ztree"></ul>
+        </div>
+        <div class="col-md-9">
+            <img src="~/images/timg.jpg" class="img-rounded img-responsive center-block" />
+        </div>
+     
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+  
+    <script src="~/lib/bootstrap/dist/js/jquery.zTree.core.min.js"></script>
+
+
+    <script>
+        var zTree, zTreeObj, DingEditRow;
+        var log, className = 'dark', curDragNodes, autoExpandNode;
+        $(function () {
+
+       
+            var setting = {
+                async: {
+                    enable: true,                                                 // 开启异步加载
+                    url: "/Home/GetTree",    // url
+                    // 初始化发送的参数可要可不要，如果传["id",null] 时，后台会解析成 : "null"
+                },
+                data: {//表示tree的数据格式
+                    simpleData: {
+                        enable: true,//表示使用简单数据模式
+                        idKey: "id",//设置之后id为在简单数据模式中的父子节点关联的桥梁
+                        pidKey: "pId",//设置之后pid为在简单数据模式中的父子节点关联的桥梁和id互相对应
+                        rootId: null//pid为null的表示根节点
+                    },
+                    key: {
+                       // checked: 'checked',
+                        children: 'children',
+                        isParent: 'isParent',
+                        name: 'name'
+
+                    }
+                },
+                view: {//表示tree的显示状态
+                    selectMulti: false,//表示禁止多选
+                    addHoverDom: addHoverDom,
+                    removeHoverDom: removeHoverDom,
+                    showIcon: true,
+                    showLine: true,
+                    selectedMulti: true,
+                    //addDiyDom: addDiyDom ,//用于在节点上固定显示用户自定义控件(add按钮)
+                },
+                check: {//表示tree的节点在点击时的相关设置
+                    enable: true,//是否显示radio/checkbox
+                    autoCheckTrigger: true,
+                    chkStyle: "checkbox",//值为checkbox或者radio表示
+                    chkboxType: { "Y": "ps", "N": "ps" },//表示父子节点的联动效果
+                    radioType: "level"//设置tree的分组
+                },
+                edit: {
+                    enable: true,
+                    drag: {
+                        isCopy: true,
+                        isMove: true,
+                        prev: true,
+                        inner: true,
+                        next: true,
+                        autoOpenTime: 0
+                    },
+                    editNameSelectAll: true,//节点编辑名称 input 初次显示时,设置 txt 内容是否为全选状态
+                    removeTitle: 'remove',//删除按钮的 Title 辅助信息
+                    renameTitle: 'rename',//编辑名称按钮的 Title 辅助信息
+                    showRemoveBtn: true,//设置是否显示删除按钮。
+                    showRemoveBtn: true //设置是否显示编辑名称按钮。
+
+                },
+                callback: {//表示tree的一些事件处理函数
+                    onClick: onClick,
+                    //onCheck: handlerCheck
+                    onAsyncSuccess: zTreeOnAsyncSuccess,
+                    beforeRemove: beforeRemove,//点击删除时触发，用来提示用户是否确定删除（可以根据返回值 true|false 确定是否可以删除）
+                    beforeEditName: beforeEditName,//点击编辑时触发，用来判断该节点是否能编辑
+                    beforeRename: beforeRename,//编辑结束时触发，用来验证输入的数据是否符合要求(也是根据返回值 true|false 确定是否可以编辑完成)
+                    onRemove: onRemove,//(beforeRemove返回true之后可以进行onRemove)删除节点后触发，用户后台操作
+                    onRename: onRename,//编辑后触发，用于操作后台
+
+                    beforeDrag: beforeDrag, //用于捕获节点被拖拽之前的事件回调函数，并且根据返回值确定是否允许开启拖拽操作
+
+                    beforeDrop: beforeDrop, //用于捕获节点拖拽操作结束之前的事件回调函数，并且根据返回值确定是否允许此拖拽操作
+
+                    beforeDragOpen: beforeDragOpen, //用于捕获拖拽节点移动到折叠状态的父节点后，即将自动展开该父节点之前的事件回调函数，并且根据返回值确定是否允许自动展开操作
+                    onDrag: onDrag, //用于捕获节点被拖拽的事件回调函数
+
+                    onDrop: onDrop, //用于捕获节点拖拽操作结束的事件回调函数
+
+                    onExpand: onExpand, //用于捕获节点被展开的事件回调函数
+                }
+
+            };
+            zTree = $.fn.zTree.init($("#myZtree"), setting, null);
+         
+
+        })
+        //然后是addHoverDom函数，用于添加增加按钮功能，还有removeHoverDom函数，用于当鼠标移出菜单的时候去掉增加按钮。
+        function addHoverDom(treeId, treeNode) {
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_" + treeNode.tId);
+            if (btn) btn.bind("click", function () {
+                // var pNode = treeNode.getParentNode();
+                $('input[name=parentid]').val(treeNode.id);
+                $('#DingTack_dialog').dialog('open');
+            });
+        };
+        function removeHoverDom(treeId, treeNode) {
+            console.log(treeNode.id)
+            $("#addBtn_" + treeNode.tId).unbind().remove();
+
+            // $("#diyBtn_space_" + treeNode.id).unbind().remove();
+        };
+        //function addDiyDom(treeId, treeNode) {
+        //    var aObj = $("#" + treeNode.tId + "_a");
+        //    if ($("#diyBtn_" + treeNode.id).length > 0) return;
+        //    var editStr = "<span id='diyBtn_space_" + treeNode.id + "' > </span>"
+        //        + "<button type='button' class='diyBtn1' id='diyBtn_" + treeNode.id
+        //        + "' title='" + treeNode.name + "' onfocus='this.blur();'></button>";
+        //    aObj.append(editStr);
+        //    var btn = $("#diyBtn_" + treeNode.id);
+        //    if (btn) btn.bind("click", function () { alert("diy Button for " + treeNode.name); });
+        //};
+        function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+            //zTreeObj = $.fn.zTree.getZTreeObj(treeId);
+            //showztreemenuNum(true, zTreeObj, 0);
+
+        };
+        function zTreeOnCheck(event, treeId, treeNode) {
+            alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+        };
+
+        function beforeRemove(treeId, treeNode) {
+            var isDel = confirm("确认删除部门 -- " + treeNode.name + " 吗？");
+            var deleted = false;
+            if (isDel) {
+                HttpPost('/DingTalk/DeleteDeptment', { id: treeNode.id }, function (response) {
+
+                    var resp = JSON.parse(response);
+                    console.log(resp.errcode);
+                    if (resp.errcode == 0) {
+                        console.log('buzhixing ')
+                        console.log(resp.errcode);
+                        return true;
+                    } else {
+                        $.messager.alert('提示', resp.errmsg, 'info');
+                        return false;
+                    }
+                })
+            }
+
+
+        }
+        function onRemove(e, treeId, treeNode) {
+            //if (treeNode.isParent) {
+            //    var ids = [];
+            //    ids = getChildren(ids, treeNode);
+            //    alert("删除父节点的id为：" + treeNode.id + "\r\n他的孩子节点有：" + ids.join(","));
+            //    return ;
+            //}
+            //alert("你点击要删除的节点的名称为：" + treeNode.name + "\r\n" + "节点id为：" + treeNode.id);
+        }
+        function beforeEditName(treeId, treeNode) {
+
+
+            // var zTree = $.fn.zTree.getZTreeObj("myZtree");
+            zTree.selectNode(treeNode);
+            /* if(treeNode.isParent){
+                alert("不准编辑非叶子节点！");
+                return false;
+            } */
+            setTimeout(function () {
+                zTree.editName(treeNode);
+            }, 0);
+            return false;
+        }
+        function beforeRename(treeId, treeNode, newName, isCancel) {
+            className = (className === "dark" ? "" : "dark");
+
+            //if (newName.length < 3) {
+            //    alert("名称不能少于3个字符！");
+            //    return false;
+            //}
+            var pattern = new RegExp("[-,]");
+            var flag = pattern.test(newName);
+            console.log(flag);
+            if (newName.length == 0 || newName.len > 64) {
+                zTree.cancelEditName();
+                $.messager.alert('提示', '部门名称长度在0-64之间', 'info')
+                return false;
+            } if (flag) {
+                zTree.cancelEditName();
+                $.messager.alert('提示', '部门名称不能包含 - ,', 'info');
+                return false;
+            }
+            HttpPost('/DingTalk/UpdateDeptment', { id: treeNode.id, name: newName }, function (response) {
+                var resp = JSON.parse(response);
+                if (resp.errcode == 0) {
+                    return true;
+                } else {
+                    $.messager.alert("提示", resp.errmsg, 'info');
+                    return false;
+                }
+            })
+            return true;
+        }
+        function onRename(e, treeId, treeNode, isCancel) {
+
+
+            // alert("修改节点的id为：" + treeNode.id + "\n修改后的名称为：" + treeNode.name);
+        }
+        function onClick(e, treeId, treeNode) {
+            if (treeNode.isParent) {
+                zTree.expandNode(treeNode);
+            } else { 
+                console.log(treeNode);
+                console.log(treeNode.Url);
+            }
+   
+            //HttpPost('/DingTalk/GetUserByDepartment', { id: treeNode.id }, function (response) {
+
+
+            //})
+        }
+
+
+        function getTime() {
+            var now = new Date(),
+                h = now.getHours(),
+                m = now.getMinutes(),
+                s = now.getSeconds(),
+                ms = now.getMilliseconds();
+            return (h + ":" + m + ":" + s + " " + ms);
+        }
+        function beforeDrag(treeId, treeNodes) {
+            console.log('beforeDrag:执行')
+            for (var i = 0, l = treeNodes.length; i < l; i++) {
+                if (treeNodes[i].drag === false) {
+                    curDragNodes = null;
+                    return false;
+                } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                    curDragNodes = null;
+                    return false;
+                }
+            }
+            curDragNodes = treeNodes;
+            return true;
+        }
+        function beforeDragOpen(treeId, treeNode) {
+            autoExpandNode = treeNode;
+            return true;
+        }
+        function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+
+            console.log('beforeDrop:执行')
+            return true;
+        }
+
+        function onDrag(event, treeId, treeNodes) {
+            console.log('onDrag:执行')
+
+        }
+        function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+
+            //console.log('onDrop:执行')
+            //console.log('treeId' + treeId);
+            //console.log('treeNodes' + treeNodes[0].id + '    ' + treeNodes[0].pId+'///'+treeNodes[0].order);
+
+            //console.log('targetNode' + targetNode.id);
+            //todo: department (其他属性都没写)
+            var dept = { id: treeNodes[0].id, name: treeNodes[0].name, parentid: targetNode.id };
+            HttpPost('/DingTalk/UpdateDeptment', dept, function (response) {
+                var resp = JSON.parse(response);
+                if (resp.errcode != 0) {
+                    $.messager.alert("提示", resp.errmsg, 'info');
+                    zTree.reAsyncChildNodes(null, "refresh");
+                } else {
+
+                }
+            })
+
+        }
+        function onExpand(event, treeId, treeNode) {
+
+        }
+        function showztreemenuNum(b, childnodes, l) {
+            if (b) {
+                var rootnodes = zTreeObj.getNodes();
+                console.log(rootnodes)
+                showztreemenuNum(false, rootnodes, l);//递归
+            } else {
+                var len = -1;
+                if (!isNull(childnodes) && !isNull((len = childnodes.length)) && len > 0) {
+                    if (l < childnodes[0].level) {
+                        return;
+                    }
+                    for (var i = 0; i < len; i++) {
+                        zTreeObj.expandNode(childnodes[i], true, false, false, true);
+                        var child = childnodes[i].children;
+                        showztreemenuNum(false, child, l);//递归
+                    }
+                }
+            }
+        }
+        /**
+       * 判断是否为空
+       *
+       */
+        function isNull(s) {
+            if (s == null || s == "") {
+                return true;
+            }
+        }
+      
+
+    </script>
+</body>
+
+</html>

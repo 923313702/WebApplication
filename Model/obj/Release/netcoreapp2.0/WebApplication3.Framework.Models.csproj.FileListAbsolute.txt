@@ -1,0 +1,11 @@
+C:\Users\Administrator\source\repos\WebApplication3\Model\bin\Release\netcoreapp2.0\WebApplication3.Framework.Models.deps.json
+C:\Users\Administrator\source\repos\WebApplication3\Model\bin\Release\netcoreapp2.0\WebApplication3.Framework.Models.dll
+C:\Users\Administrator\source\repos\WebApplication3\Model\bin\Release\netcoreapp2.0\WebApplication3.Framework.Models.pdb
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.csprojAssemblyReference.cache
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.Properties.Resources.resources
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.dll
+C:\Users\Administrator\source\repos\WebApplication3\Model\obj\Release\netcoreapp2.0\WebApplication3.Framework.Models.pdb
